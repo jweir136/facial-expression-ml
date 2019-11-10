@@ -35,7 +35,7 @@ class Generators:
 
 if __name__ == "__main__":
     train_df, test_df = DataManager().get_data()
-    train_generator, test_generator = Generators().get_generators()
+    train_generator, test_generator = Generators(train_df, test_df).get_generators()
 
     for img_batch, target_batch in train_generator:
         print(img_batch.shape)
