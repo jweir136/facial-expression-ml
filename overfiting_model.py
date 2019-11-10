@@ -48,10 +48,8 @@ model = keras.models.Sequential([
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
 history = model.fit_generator(
     train_generator,
-    epochs=1,
-    steps_per_epoch=1,
+    epochs=10,
     validation_data=validation_generator,
-    validation_steps=1,
     verbose=2
 )
 
