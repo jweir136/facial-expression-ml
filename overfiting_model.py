@@ -20,7 +20,7 @@ train_generator = datagen.flow_from_dataframe(
     target_size=(100, 100)
 )
 validation_generator = datagen.flow_from_dataframe(
-    dataframe=validation_train_df,
+    dataframe=small_validation_df,
     directory=images_dir,
     x_col="filenames",
     y_col="expression",
