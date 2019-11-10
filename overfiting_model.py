@@ -7,7 +7,7 @@ import pandas as pd
 
 images_dir = "/storage/facial_expression_images/images"
 full_df = pd.read_csv("/storage/affectnet+expw.csv")
-large_subset, small_subset = train_test_split(full_df, test_size=0.05)
+large_subset, small_subset = train_test_split(full_df, test_size=0.01)
 small_train_df, small_validation_df = train_test_split(small_subset, test_size=0.1)
 
 datagen = keras.preprocessing.image.ImageDataGenerator(rescale=1/255.)
@@ -16,22 +16,22 @@ train_generator = datagen.flow_from_dataframe(
     directory=images_dir,
     x_col="filenames",
     y_col="expression",
-    batch_size=128,
-    target_size=(100, 100)
+    batch_size=256,
+    target_size=(96, 96)
 )
 validation_generator = datagen.flow_from_dataframe(
     dataframe=small_validation_df,
     directory=images_dir,
     x_col="filenames",
     y_col="expression",
-    batch_size=128,
-    target_size=(100, 100)
+    batch_size=256,
+    target_size=(96, 96)
 )
 
 earlyStopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, verbose=0, mode='min')
 
 model = keras.models.Sequential([
-    keras.layers.Conv2D(128, (3, 3), input_shape=(100, 100, 3), activation='relu'),
+    keras.layers.Conv2D(128, (3, 3), input_shape=(96, 96, 3), activation='relu'),
     keras.layers.Conv2D(128, (3, 3), activation='relu'),
     keras.layers.Conv2D(128, (3, 3)),
     keras.layers.MaxPooling2D((2, 2)),
