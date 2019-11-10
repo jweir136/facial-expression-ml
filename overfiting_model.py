@@ -17,7 +17,8 @@ train_generator = datagen.flow_from_dataframe(
     x_col="filenames",
     y_col="expression",
     batch_size=128,
-    target_size=(96, 96)
+    target_size=(96, 96),
+    color_mode='grayscale'
 )
 validation_generator = datagen.flow_from_dataframe(
     dataframe=small_validation_df,
@@ -25,7 +26,8 @@ validation_generator = datagen.flow_from_dataframe(
     x_col="filenames",
     y_col="expression",
     batch_size=128,
-    target_size=(96, 96)
+    target_size=(96, 96),
+    color_mode='grayscale'
 )
 
 earlyStopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, verbose=0, mode='min')
@@ -34,7 +36,7 @@ class AlertEpochStart(keras.callbacks.Callback):
         print("Starting Epoch {}".format(epoch))
 
 model = keras.models.Sequential([
-    keras.layers.Conv2D(128, (3, 3), input_shape=(100, 100, 3), activation='relu'),
+    keras.layers.Conv2D(128, (3, 3), input_shape=(96, 96, 1), activation='relu'),
     keras.layers.Conv2D(128, (3, 3), activation='relu'),
     keras.layers.Conv2D(128, (3, 3)),
     keras.layers.MaxPooling2D((2, 2)),
