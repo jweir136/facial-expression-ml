@@ -38,6 +38,13 @@ class Generators:
     def get_generators(self):
         return (self.train_generator, self.test_generator)
 
+class CallbackManager:
+    def __init__(self):
+        self.earlyStopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=3, verbose=0, mode='min')
+
+    def get_early_stopping(self):
+        return self.earlyStopping
+
 class OverfittingModel:
     def __init__(self):
         input_layer = Input(shape=(32, 32, 3))
@@ -79,4 +86,10 @@ if __name__ == "__main__":
     train_generator, test_generator = Generators(train_df, test_df).get_generators()
 
     model = OverfittingModel().get_model()
-    print(model.summary())
+    model.compile(optimizer='adam', loss='categorical', metrics=['acc'])
+    history = model.fit_generator(
+        train_generator,
+        epochs=20,
+        validation_data=test_generator,
+        callbacks=[CallbackManager().get_early_stopping()]
+    )
