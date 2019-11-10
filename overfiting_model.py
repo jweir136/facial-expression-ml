@@ -17,7 +17,7 @@ train_generator = datagen.flow_from_dataframe(
     x_col="filenames",
     y_col="expression",
     batch_size=128,
-    target_size=(100, 100)
+    target_size=(96, 96)
 )
 validation_generator = datagen.flow_from_dataframe(
     dataframe=small_validation_df,
@@ -25,7 +25,7 @@ validation_generator = datagen.flow_from_dataframe(
     x_col="filenames",
     y_col="expression",
     batch_size=128,
-    target_size=(100, 100)
+    target_size=(96, 96)
 )
 
 earlyStopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, verbose=0, mode='min')
