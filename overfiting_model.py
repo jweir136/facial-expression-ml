@@ -57,4 +57,4 @@ history = model.fit_generator(
 
 plt.plot(range(len(history.history['acc'])), history.history['acc'], 'r')
 plt.plot(range(len(history.history['val_acc'])), history.history['val_acc'], 'bo')
-plt.savefig("/storage/overfitting_training_history.png")
+plt.savefig("/artifacts/overfitting_training_history.png")
