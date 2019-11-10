@@ -4,6 +4,6 @@ import os
 
 print("!"*40)
 print("\n")
-print(os.listdir("/storage/images/"))
+print(os.listdir("storage/"))
 print("\n")
 print("!"*40)
