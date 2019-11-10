@@ -59,6 +59,8 @@ history = model.fit_generator(
     epochs=10,
     validation_data=validation_generator,
     verbose=1,
+    steps_per_epoch=1,
+    validation_steps=1,
     callbacks=[earlyStopping]
 )
 
