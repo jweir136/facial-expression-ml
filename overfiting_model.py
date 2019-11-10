@@ -16,7 +16,7 @@ train_generator = datagen.flow_from_dataframe(
     directory=images_dir,
     x_col="filenames",
     y_col="expression",
-    batch_size=200,
+    batch_size=256,
     target_size=(96, 96)
 )
 validation_generator = datagen.flow_from_dataframe(
@@ -24,7 +24,7 @@ validation_generator = datagen.flow_from_dataframe(
     directory=images_dir,
     x_col="filenames",
     y_col="expression",
-    batch_size=200,
+    batch_size=256,
     target_size=(96, 96)
 )
 
@@ -58,9 +58,7 @@ history = model.fit_generator(
     train_generator,
     epochs=10,
     validation_data=validation_generator,
-    verbose=1,
-    steps_per_epoch=1,
-    validation_steps=1,
+    verbose=2,
     callbacks=[earlyStopping]
 )
 
