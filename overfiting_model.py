@@ -3,6 +3,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
+import pandas as pd
 
 images_dir = "/storage/facial_expression_images/images"
 full_df = pd.read_csv("/storage/affectnet+expw.csv")
