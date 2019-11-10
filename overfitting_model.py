@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from keras.layers.*
 
 class DataManager:
     def __init__(self):
@@ -37,10 +38,45 @@ class Generators:
     def get_generators(self):
         return (self.train_generator, self.test_generator)
 
+class OverfittingModel:
+    def __init__(self):
+        input_layer = Input(shape=(32, 32, 3))
+        x = Conv2D(64, (3, 3), activation='relu')(input_layer)
+        x = Conv2D(64, (3, 3), activation='relu')(x)
+        x = Conv2D(64, (3, 3), activation='relu')(x)
+        x = MaxPooling2D((2, 2))(x)
+        x = Conv2D(32, (3, 3), activation='relu')(x)
+        x = Conv2D(32, (3, 3), activation='relu')(x)
+        x = Conv2D(32, (3, 3), activation='relu')(x)
+        x = MaxPooling2D((2, 2))(x)
+        x = Flatten()(x)
+        x = Dropout(0.0)(x)
+
+        y = Conv2D(64, (3, 3), activation='relu')(input_layer)
+        y = Conv2D(64, (3, 3), activation='relu')(y)
+        y = Conv2D(64, (3, 3), activation='relu')(y)
+        y = MaxPooling2D((2, 2))(y)
+        y = Conv2D(32, (3, 3), activation='relu')(y)
+        y = Conv2D(32, (3, 3), activation='relu')(y)
+        y = Conv2D(32, (3, 3), activation='relu')(y)
+        y = MaxPooling2D((2, 2))(y)
+        y = Flatten()(y)
+        y = Dropout(0.0)(y)
+
+        concat = Concatenate([x, y])
+
+        x = Dense(64, activation='relu')(x)
+        x = Dense(32, activation='relu')(x)
+        x = Dense(4, activation='softmax')(x)
+
+        self.model = keras.models.Model(input_layer, x)
+        
+    def get_model(self):
+        return self.model
+
 if __name__ == "__main__":
     train_df, test_df = DataManager().get_data()
     train_generator, test_generator = Generators(train_df, test_df).get_generators()
 
-    for img_batch, target_batch in train_generator:
-        print(img_batch.shape)
-        break
+    model = OverfittingModel().get_model()
+    print(model.summary())
