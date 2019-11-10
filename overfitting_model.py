@@ -1,9 +1,9 @@
-import keras
+import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from keras.layers import *
+from tensorflow.keras.layers import *
 
 class DataManager:
     def __init__(self):
@@ -15,7 +15,7 @@ class DataManager:
 
 class Generators:
     def __init__(self, train_df, test_df):
-        generator = keras.preprocessing.image.ImageDataGenerator(rescale=1/255.)
+        generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1/255.)
         self.train_generator = generator.flow_from_dataframe(
             directory = "/storage/facial_expression_images/images",
             dataframe = train_df,
@@ -40,7 +40,7 @@ class Generators:
 
 class CallbackManager:
     def __init__(self):
-        self.earlyStopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=3, verbose=0, mode='min')
+        self.earlyStopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=3, verbose=0, mode='min')
 
     def get_early_stopping(self):
         return self.earlyStopping
@@ -76,7 +76,7 @@ class OverfittingModel:
         x = Dense(32, activation='relu')(x)
         x = Dense(4, activation='softmax')(x)
 
-        self.model = keras.models.Model(input_layer, x)
+        self.model = tf.keras.models.Model(input_layer, x)
         
     def get_model(self):
         return self.model
