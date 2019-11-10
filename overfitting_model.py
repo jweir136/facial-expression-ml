@@ -1,6 +1,5 @@
 import tensorflow as tf
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.layers import *
@@ -93,8 +92,3 @@ if __name__ == "__main__":
         validation_data=test_generator,
         callbacks=[CallbackManager().get_early_stopping()]
     )
-
-    X = range(len(history.history['val_acc']))
-    plt.plot(X, history.history['acc'], 'r')
-    plt.plot(X, history.history['val_acc'], 'bo')
-    plt.savefig("/artifacts/training_history.png")
