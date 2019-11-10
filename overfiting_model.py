@@ -29,12 +29,7 @@ validation_generator = datagen.flow_from_dataframe(
 )
 
 model = keras.models.Sequential([
-    keras.layers.Conv2D(128, (3, 3), activation='relu', input_shape=(100, 100, 3)),
-    keras.layers.Conv2D(128, (3, 3), activation='relu'),
-    keras.layers.Conv2D(128, (3, 3)),
-    keras.layers.MaxPooling2D((2, 2)),
-    keras.layers.Activation('relu'),
-    keras.layers.Conv2D(64, (3, 3), activation='relu'),
+    keras.layers.Conv2D(64, (3, 3), input_shape=(100, 100, 3), activation='relu'),
     keras.layers.Conv2D(64, (3, 3), activation='relu'),
     keras.layers.Conv2D(64, (3, 3)),
     keras.layers.MaxPooling2D((2, 2)),
@@ -46,8 +41,6 @@ model = keras.models.Sequential([
     keras.layers.Activation('relu'),
     keras.layers.Flatten(),
     keras.layers.Dropout(0.0),
-    keras.layers.Dense(256, activation='relu'),
-    keras.layers.Dense(128, activation='relu'),
     keras.layers.Dense(64, activation='relu'),
     keras.layers.Dense(32, activation='relu'),
     keras.layers.Dense(4, activation='softmax')
