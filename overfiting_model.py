@@ -46,9 +46,15 @@ model = keras.models.Sequential([
     keras.layers.Dense(4, activation='softmax')
 ])
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
-model.fit_generator(
+history = model.fit_generator(
     train_generator,
-    epochs=10,
+    epochs=1,
+    steps_per_epoch=1,
     validation_data=validation_generator,
+    validation_steps=1,
     verbose=2
 )
+
+plt.plot(range(len(history.history['acc'])), history.history['acc'], 'r')
+plt.plot(range(len(history.history['val_acc'])), history.history['val_acc'], 'bo')
+plt.savefig("/storage/overfitting_training_history.png")
