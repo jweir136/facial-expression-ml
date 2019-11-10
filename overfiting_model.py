@@ -13,7 +13,7 @@ print("!"*40)
 
 images_dir = "/storage/facial_expression_images/images"
 full_df = pd.read_csv("/storage/affectnet+expw.csv")
-large_subset, small_subset = train_test_split(full_df, test_size=0.05)
+large_subset, small_subset = train_test_split(full_df, test_size=0.01)
 small_train_df, small_validation_df = train_test_split(small_subset, test_size=0.1)
 
 datagen = keras.preprocessing.image.ImageDataGenerator(rescale=1/255.)
