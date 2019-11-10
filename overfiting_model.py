@@ -16,7 +16,7 @@ train_generator = datagen.flow_from_dataframe(
     directory=images_dir,
     x_col="filenames",
     y_col="expression",
-    batch_size=512,
+    batch_size=128,
     target_size=(100, 100)
 )
 validation_generator = datagen.flow_from_dataframe(
@@ -24,7 +24,7 @@ validation_generator = datagen.flow_from_dataframe(
     directory=images_dir,
     x_col="filenames",
     y_col="expression",
-    batch_size=512,
+    batch_size=128,
     target_size=(100, 100)
 )
 
