@@ -2,7 +2,6 @@ import tensorflow as tf
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.layers import *
 
 class DataManager:
     def __init__(self):
@@ -46,34 +45,34 @@ class CallbackManager:
 
 class OverfittingModel:
     def __init__(self):
-        input_layer = Input(shape=(32, 32, 3))
-        x = Conv2D(64, (3, 3), activation='relu')(input_layer)
-        x = Conv2D(64, (3, 3), activation='relu')(x)
-        x = Conv2D(64, (3, 3), activation='relu')(x)
-        x = MaxPooling2D((2, 2))(x)
-        x = Conv2D(32, (3, 3), activation='relu')(x)
-        x = Conv2D(32, (3, 3), activation='relu')(x)
-        x = Conv2D(32, (3, 3), activation='relu')(x)
-        x = MaxPooling2D((2, 2))(x)
-        x = Flatten()(x)
-        x = Dropout(0.0)(x)
+        input_layer = tf.keras.layers.Input(shape=(32, 32, 3))
+        x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(input_layer)
+        x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(x)
+        x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(x)
+        x = tf.keras.layers.MaxPooling2D((2, 2))(x)
+        x = tf.keras.layers.Conv2D(32, (3, 3), activation='relu')(x)
+        x = tf.keras.layers.Conv2D(32, (3, 3), activation='relu')(x)
+        x = tf.keras.layers.Conv2D(32, (3, 3), activation='relu')(x)
+        x = tf.keras.layers.MaxPooling2D((2, 2))(x)
+        x = tf.keras.layers.Flatten()(x)
+        x = tf.keras.layers.Dropout(0.0)(x)
 
-        y = Conv2D(64, (3, 3), activation='relu')(input_layer)
-        y = Conv2D(64, (3, 3), activation='relu')(y)
-        y = Conv2D(64, (3, 3), activation='relu')(y)
-        y = MaxPooling2D((2, 2))(y)
-        y = Conv2D(32, (3, 3), activation='relu')(y)
-        y = Conv2D(32, (3, 3), activation='relu')(y)
-        y = Conv2D(32, (3, 3), activation='relu')(y)
-        y = MaxPooling2D((2, 2))(y)
-        y = Flatten()(y)
-        y = Dropout(0.0)(y)
+        y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(input_layer)
+        y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(y)
+        y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(y)
+        y = tf.keras.layers.MaxPooling2D((2, 2))(y)
+        y = tf.keras.layers.Conv2D(32, (3, 3), activation='relu')(y)
+        y = tf.keras.layers.Conv2D(32, (3, 3), activation='relu')(y)
+        y = tf.keras.layers.Conv2D(32, (3, 3), activation='relu')(y)
+        y = tf.keras.layers.MaxPooling2D((2, 2))(y)
+        y = tf.keras.layers.Flatten()(y)
+        y = tf.keras.layers.Dropout(0.0)(y)
 
-        concat = Concatenate([x, y])
+        concat = tf.keras.layers.Concatenate([x, y])
 
-        x = Dense(64, activation='relu')(x)
-        x = Dense(32, activation='relu')(x)
-        x = Dense(4, activation='softmax')(x)
+        x = tf.keras.layers.Dense(64, activation='relu')(x)
+        x = tf.keras.layers.Dense(32, activation='relu')(x)
+        x = tf.keras.layers.Dense(4, activation='softmax')(x)
 
         self.model = tf.keras.models.Model(input_layer, x)
         
