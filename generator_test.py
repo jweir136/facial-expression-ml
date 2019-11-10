@@ -2,7 +2,7 @@ import keras
 import numpy as np
 import matplotlib.pyplot as plt
 
-generator = keras.ImageDataGenerator(rescale=1/255.)
+generator = keras.preprocessing.image.ImageDataGenerator(rescale=1/255.)
 train_generator = generator.flow_from_dataframe(
     directory="/storage/facial_expression_images/images",
     dataframe="/storage/affectnet+expw.csv",
