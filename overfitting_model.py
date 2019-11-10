@@ -18,6 +18,8 @@ class Generators:
         self.train_generator = generator.flow_from_dataframe(
             directory = "/storage/facial_expression_images/images",
             dataframe = train_df,
+            x_col="filenames",
+            y_col="expression",
             target_size=(32, 32),
             class_mode='categorical',
             batch_size=256
@@ -25,6 +27,8 @@ class Generators:
         self.test_generator = generator.flow_from_dataframe(
             directory = "/storage/facial_expression_images/images",
             dataframe = test_df,
+            x_col="filenames",
+            y_col="expression",
             target_size=(32, 32),
             class_mode='categorical',
             batch_size=256
