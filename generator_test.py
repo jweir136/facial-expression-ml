@@ -11,7 +11,6 @@ train_generator = generator.flow_from_dataframe(
     target_size=(32, 32),
     color_mode='grayscale',
     class_mode='categorical',
-    batch_size=256
 )
 validation_generator = generator.flow_from_dataframe(
     directory="/storage/facial_expression_images/images",
@@ -21,9 +20,9 @@ validation_generator = generator.flow_from_dataframe(
     target_size=(32, 32),
     color_mode='grayscale',
     class_mode='categorical',
-    batch_size=256
 )
 
 for img_batch, target_batch in train_generator:
     print(target_batch[0])
+    print(target_batch.shape)
     break
