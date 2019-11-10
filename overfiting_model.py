@@ -28,7 +28,7 @@ validation_generator = datagen.flow_from_dataframe(
     target_size=(100, 100)
 )
 
-model = keras.models.Sequential(
+model = keras.models.Sequential([
     keras.layers.Conv2D(256, (3, 3), activation='relu', input_shape=(100, 100, 3)),
     keras.layers.Conv2D(256, (3, 3), activation='relu'),
     keras.layers.Conv2D(256, (3, 3)),
@@ -56,7 +56,7 @@ model = keras.models.Sequential(
     keras.layers.Dense(64, activation='relu'),
     keras.layers.Dense(32, activation='relu'),
     keras.layers.Dense(4, activation='softmax')
-)
+])
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
 model.fit_generator(
     train_generator,
