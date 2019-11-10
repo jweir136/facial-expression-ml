@@ -50,7 +50,7 @@ history = model.fit_generator(
     train_generator,
     epochs=10,
     validation_data=validation_generator,
-    verbose=2
+    verbose=1
 )
 
 plt.plot(range(len(history.history['acc'])), history.history['acc'], 'r')
