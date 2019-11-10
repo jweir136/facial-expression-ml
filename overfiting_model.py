@@ -29,12 +29,7 @@ validation_generator = datagen.flow_from_dataframe(
 )
 
 model = keras.models.Sequential([
-    keras.layers.Conv2D(256, (3, 3), activation='relu', input_shape=(100, 100, 3)),
-    keras.layers.Conv2D(256, (3, 3), activation='relu'),
-    keras.layers.Conv2D(256, (3, 3)),
-    keras.layers.MaxPooling2D((2, 2)),
-    keras.layers.Activation('relu'),
-    keras.layers.Conv2D(128, (3, 3), activation='relu'),
+    keras.layers.Conv2D(128, (3, 3), activation='relu', input_shape=(100, 100, 3)),
     keras.layers.Conv2D(128, (3, 3), activation='relu'),
     keras.layers.Conv2D(128, (3, 3)),
     keras.layers.MaxPooling2D((2, 2)),
