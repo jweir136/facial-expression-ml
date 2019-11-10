@@ -29,6 +29,9 @@ validation_generator = datagen.flow_from_dataframe(
 )
 
 earlyStopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, verbose=0, mode='min')
+class AlertEpochStart(keras.callbacks.Callback):
+    def on_epoch_begin(self, epoch, logs=None):
+        print("Starting Epoch {}".format(epoch))
 
 model = keras.models.Sequential([
     keras.layers.Conv2D(128, (3, 3), input_shape=(100, 100, 3), activation='relu'),
@@ -59,5 +62,5 @@ history = model.fit_generator(
     epochs=10,
     validation_data=validation_generator,
     verbose=2,
-    callbacks=[earlyStopping]
+    callbacks=[earlyStopping, AlertEpochStart()]
 )
