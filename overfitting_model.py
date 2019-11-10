@@ -86,7 +86,7 @@ if __name__ == "__main__":
     train_generator, test_generator = Generators(train_df, test_df).get_generators()
 
     model = OverfittingModel().get_model()
-    model.compile(optimizer='adam', loss='categorical', metrics=['acc'])
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
     history = model.fit_generator(
         train_generator,
         epochs=20,
