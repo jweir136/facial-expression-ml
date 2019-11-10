@@ -28,6 +28,8 @@ validation_generator = datagen.flow_from_dataframe(
     target_size=(100, 100)
 )
 
+earlyStopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, verbose=0, mode='min')
+
 model = keras.models.Sequential([
     keras.layers.Conv2D(128, (3, 3), input_shape=(100, 100, 3), activation='relu'),
     keras.layers.Conv2D(128, (3, 3), activation='relu'),
@@ -56,7 +58,8 @@ history = model.fit_generator(
     train_generator,
     epochs=10,
     validation_data=validation_generator,
-    verbose=1
+    verbose=1,
+    callbacks=[earlyStopping]
 )
 
 plt.plot(range(len(history.history['acc'])), history.history['acc'], 'r')
