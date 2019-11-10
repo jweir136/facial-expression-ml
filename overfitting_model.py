@@ -12,5 +12,31 @@ class DataManager:
     def get_data(self):
         return (self.train_df, self.test_df)
 
+class Generators:
+    def __init__(self, train_df, test_df):
+        generator = keras.preprocessing.image.ImageDataGenerator(rescale=1/255.)
+        self.train_generator = generator.flow_from_dataframe(
+            directory = "/storage/facial_expression_images/images",
+            dataframe = train_df,
+            target_size=(32, 32),
+            class_mode='categorical',
+            batch_size=256
+        )
+        self.test_generator = generator.flow_from_dataframe(
+            directory = "/storage/facial_expression_images/images",
+            dataframe = test_df,
+            target_size=(32, 32),
+            class_mode='categorical',
+            batch_size=256
+        )
+
+    def get_generators(self):
+        return (self.train_generator, self.test_generator)
+
 if __name__ == "__main__":
-    print(DataManager().get_data())
+    train_df, test_df = DataManager().get_data()
+    train_generator, test_generator = Generators().get_generators()
+
+    for img_batch, target_batch in train_generator:
+        print(img_batch.shape)
+        break
