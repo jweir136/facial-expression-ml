@@ -51,11 +51,7 @@ class CallbackManager:
 class OverfittingModel:
     def __init__(self):
         input_layer = tf.keras.layers.Input(shape=(32, 32, 3))
-        x = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(input_layer)
-        x = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(x)
-        x = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(x)
-        x = tf.keras.layers.MaxPooling2D((2, 2))(x)
-        x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(x)
+        x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(input_layer)
         x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(x)
         x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(x)
         x = tf.keras.layers.MaxPooling2D((2, 2))(x)
@@ -66,11 +62,7 @@ class OverfittingModel:
         x = tf.keras.layers.Flatten()(x)
         x = tf.keras.layers.Dropout(0.0)(x)
 
-        y = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(input_layer)
-        y = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(y)
-        y = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(y)
-        y = tf.keras.layers.MaxPooling2D((2, 2))(y)
-        y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(y)
+        y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(input_layer)
         y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(y)
         y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(y)
         y = tf.keras.layers.MaxPooling2D((2, 2))(y)
