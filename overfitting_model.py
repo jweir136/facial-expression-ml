@@ -87,9 +87,13 @@ class OverfittingModel:
 if __name__ == "__main__":
     train_df, test_df = DataManager().get_data()
     train_generator, test_generator = Generators(train_df, test_df).get_generators()
+    print("GOT DATA AND GENERATORS")
 
     model = OverfittingModel().get_model()
+    print("LOADED MODEL")
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
+    print("COMPILIED MODEL")
+    print("STARTING TRAINING")
     history = model.fit_generator(
         train_generator,
         epochs=1,
