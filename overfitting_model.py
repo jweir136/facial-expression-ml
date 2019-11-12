@@ -98,5 +98,6 @@ if __name__ == "__main__":
         train_generator,
         epochs=1,
         validation_data=test_generator,
-        callbacks=[CallbackManager().get_early_stopping(), CallbackManager().get_checkpoint()]
+        callbacks=[CallbackManager().get_early_stopping(), CallbackManager().get_checkpoint()],
+        verbose=1
     )
