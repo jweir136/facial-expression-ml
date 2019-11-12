@@ -51,7 +51,11 @@ class CallbackManager:
 class OverfittingModel:
     def __init__(self):
         input_layer = tf.keras.layers.Input(shape=(32, 32, 3))
-        x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(input_layer)
+        x = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(input_layer)
+        x = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(x)
+        x = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(x)
+        x = tf.keras.layers.MaxPooling2D((2, 2))(x)
+        x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(x)
         x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(x)
         x = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(x)
         x = tf.keras.layers.MaxPooling2D((2, 2))(x)
@@ -62,7 +66,11 @@ class OverfittingModel:
         x = tf.keras.layers.Flatten()(x)
         x = tf.keras.layers.Dropout(0.0)(x)
 
-        y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(input_layer)
+        y = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(input_layer)
+        y = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(y)
+        y = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(y)
+        y = tf.keras.layers.MaxPooling2D((2, 2))(y)
+        y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(y)
         y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(y)
         y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(y)
         y = tf.keras.layers.MaxPooling2D((2, 2))(y)
@@ -75,6 +83,7 @@ class OverfittingModel:
 
         concat = tf.keras.layers.Concatenate([x, y])
 
+        x = tf.keras.layers.Dense(128, activation='relu')(concat)
         x = tf.keras.layers.Dense(64, activation='relu')(x)
         x = tf.keras.layers.Dense(32, activation='relu')(x)
         x = tf.keras.layers.Dense(4, activation='softmax')(x)
@@ -96,7 +105,7 @@ if __name__ == "__main__":
     print("STARTING TRAINING")
     history = model.fit_generator(
         train_generator,
-        epochs=1,
+        epochs=50,
         validation_data=test_generator,
         callbacks=[CallbackManager().get_early_stopping(), CallbackManager().get_checkpoint()],
         verbose=1
