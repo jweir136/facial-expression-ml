@@ -61,21 +61,6 @@ class OverfittingModel:
         x = tf.keras.layers.MaxPooling2D((2, 2))(x)
         x = tf.keras.layers.Flatten()(x)
         x = tf.keras.layers.Dropout(0.0)(x)
-
-        y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(input_layer)
-        y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(y)
-        y = tf.keras.layers.Conv2D(64, (3, 3), activation='relu')(y)
-        y = tf.keras.layers.MaxPooling2D((2, 2))(y)
-        y = tf.keras.layers.Conv2D(32, (3, 3), activation='relu')(y)
-        y = tf.keras.layers.Conv2D(32, (3, 3), activation='relu')(y)
-        y = tf.keras.layers.Conv2D(32, (3, 3), activation='relu')(y)
-        y = tf.keras.layers.MaxPooling2D((2, 2))(y)
-        y = tf.keras.layers.Flatten()(y)
-        y = tf.keras.layers.Dropout(0.0)(y)
-
-        concat = tf.keras.layers.Concatenate([x, y])
-
-        x = tf.keras.layers.Dense(128, activation='relu')(concat)
         x = tf.keras.layers.Dense(64, activation='relu')(x)
         x = tf.keras.layers.Dense(32, activation='relu')(x)
         x = tf.keras.layers.Dense(4, activation='softmax')(x)
