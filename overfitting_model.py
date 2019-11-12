@@ -40,7 +40,7 @@ class CallbackManager:
     def __init__(self):
         self.earlyStopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=3, verbose=0, mode='min')
         filepath = "/storage/facial_expression_weights/overfitting_model/saved-facial-expression-model-{epoch:02d}-{val_acc:.2f}.hdf5"
-        self.checkpoint = tf.keras.callbacks.ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=False, mode='max', period=5)
+        self.checkpoint = tf.keras.callbacks.ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=False, mode='max')
 
     def get_early_stopping(self):
         return self.earlyStopping
