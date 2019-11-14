@@ -105,5 +105,5 @@ if __name__ == "__main__":
         epochs=50,
         validation_data=test_generator,
         callbacks=[CallbackManager().get_early_stopping(), CallbackManager().get_checkpoint(), CallbackManager().get_save_best()],
-        verbose=1
+        verbose=2
     )
