@@ -30,7 +30,7 @@ class Generators:
             dataframe = train_df,
             x_col="filenames",
             y_col="expression",
-            target_size=(32, 32),
+            target_size=(64, 64),
             class_mode='categorical',
             batch_size=256
         )
@@ -39,7 +39,7 @@ class Generators:
             dataframe = test_df,
             x_col="filenames",
             y_col="expression",
-            target_size=(32, 32),
+            target_size=(64, 64),
             class_mode='categorical',
             batch_size=256
         )
@@ -65,7 +65,7 @@ class CallbackManager:
 
 class OverfittingModel:
     def __init__(self):
-        input_layer = tf.keras.layers.Input(shape=(32, 32, 3))
+        input_layer = tf.keras.layers.Input(shape=(64, 64, 3))
         x = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(input_layer)
         x = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(x)
         x = tf.keras.layers.Conv2D(128, (3, 3), activation='relu')(x)
